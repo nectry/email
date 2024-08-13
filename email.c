@@ -338,23 +338,26 @@ static void commit(void *data) {
 
   if (j->h->to) {
     char *saveptr, *addr = strtok_r(j->h->to, ",", &saveptr);
-    do {
-      recipients = curl_slist_append(recipients, addrOf(addr));
-    } while ((addr = strtok_r(NULL, ",", &saveptr)));
+    if (addr)
+      do {
+        recipients = curl_slist_append(recipients, addrOf(addr));
+      } while ((addr = strtok_r(NULL, ",", &saveptr)));
   }
 
   if (j->h->cc) {
     char *saveptr, *addr = strtok_r(j->h->cc, ",", &saveptr);
-    do {
-      recipients = curl_slist_append(recipients, addrOf(addr));
-    } while ((addr = strtok_r(NULL, ",", &saveptr)));
+    if (addr)
+      do {
+        recipients = curl_slist_append(recipients, addrOf(addr));
+      } while ((addr = strtok_r(NULL, ",", &saveptr)));
   }
 
   if (j->h->bcc) {
     char *saveptr, *addr = strtok_r(j->h->bcc, ",", &saveptr);
-    do {
-      recipients = curl_slist_append(recipients, addrOf(addr));
-    } while ((addr = strtok_r(NULL, ",", &saveptr)));
+    if (addr)
+      do {
+        recipients = curl_slist_append(recipients, addrOf(addr));
+      } while ((addr = strtok_r(NULL, ",", &saveptr)));
   }
   
   curl = curl_easy_init();
